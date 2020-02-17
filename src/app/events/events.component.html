@@ -3,7 +3,7 @@
         Dropdown
         <clr-icon shape="caret down"></clr-icon>
     </button>
-    <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
+    <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
         <label class="dropdown-header" aria-hidden="true">Dropdown header</label>
         <div aria-label="Dropdown header Action 1" clrDropdownItem>Action 1</div>
         <div aria-label="Dropdown header Disabled Action" [clrDisabled]="true" clrDropdownItem>Disabled Action</div>
@@ -24,6 +24,6 @@
     </clr-dropdown-menu>
 </clr-dropdown>
 <div class="event-container">
-
+<p>HIII</p>
 </div>
 <button [clrLoading]="validateBtnState" class="btn btn-info-outline" (click)="validateDemo()">Validate</button>
