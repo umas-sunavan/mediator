@@ -9,16 +9,8 @@ import { ClrLoadingState  } from '@clr/angular';
 export class EventsComponent implements OnInit {
 
   constructor() { }
-  validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
-
-  clrIfOpen: boolean
 
   ngOnInit() {
-    this.clrIfOpen = false
-  }
-
-  validateDemo = () => {
-    this.validateBtnState = ClrLoadingState.LOADING
   }
 
 }

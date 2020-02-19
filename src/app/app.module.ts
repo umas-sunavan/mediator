@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventsComponent } from './events/events.component';
+import { MainListComponent } from './main-list/main-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventsComponent
+    EventsComponent,
+    MainListComponent
   ],
   imports: [
     BrowserModule,
