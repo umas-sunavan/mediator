@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventsComponent } from './events/events.component';
-import { MainListComponent } from './main-list/main-list.component';
+import { MainListComponent } from './main-browse/main-list/main-list.component';
+import { TitleDropDownComponent } from './main-browse/title-drop-down/title-drop-down.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventsComponent,
-    MainListComponent
+    MainListComponent,
+    TitleDropDownComponent
   ],
   imports: [
     BrowserModule,

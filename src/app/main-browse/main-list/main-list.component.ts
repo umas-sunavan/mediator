@@ -8,18 +8,16 @@ import { ClrLoadingState } from '@clr/angular';
 })
 export class MainListComponent implements OnInit {
 
-  constructor() { }
-  validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
 
-  clrIfOpen: boolean
+  constructor() { }
+  // validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
+
 
   ngOnInit() {
-    this.clrIfOpen = false
   }
+
 
   validateDemo = () => {
-    this.validateBtnState = ClrLoadingState.LOADING
+    // this.validateBtnState = ClrLoadingState.LOADING
   }
-
-
 }
