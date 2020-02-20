@@ -2,9 +2,9 @@
 <!-- <button [clrLoading]="validateBtnState" class="btn btn-info-outline" (click)="validateDemo()">Validate</button> -->
 <div class="clr-row m-3">
   <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-    <div class="card">
+    <div class="md-card mb-2" *ngFor="let card of ['世界經濟論壇', '索羅門 台灣 斷交', '中共 軍機 巴士海峽', '黑鷹 直升機 參謀總長']">
       <div class="card-title">
-        世界經濟論壇
+        {{card}}
       </div>
       <div class="card-text">
         自由、ETToday、中時、今日、中天 共16則標記
