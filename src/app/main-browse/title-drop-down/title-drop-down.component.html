@@ -1,11 +1,11 @@
 <div class="mx-auto pt-2 d-flex">
     <clr-dropdown class=" mx-auto">
         <button class="btn btn-link" clrDropdownTrigger>
-            Highlights In This Week
+            {{displayTypeControl === 'news' ? 'All News' : 'Highlights In This Week'}}
             <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-            <div aria-label="Dropdown header Action 1" clrDropdownItem>All News</div>
+            <div aria-label="Dropdown header Action 2" clrDropdownItem (click)="switchDisplay(displayTypeControl === 'news' ? 'events' : 'news')">{{ displayTypeControl === 'news' ? 'Events' : 'News'}}</div>
         </clr-dropdown-menu>
     </clr-dropdown>
 </div>

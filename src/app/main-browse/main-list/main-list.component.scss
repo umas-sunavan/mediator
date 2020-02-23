@@ -1,8 +1,47 @@
 .md-card {
     padding: 12px;
-    box-shadow: 0px 5px 8px -1px #0000000a;
+    box-shadow: 0px 5px 8px -1px #0061970d;
     background-color: white;
     border-radius: 2px 6px 6px 2px;
     border-left: #0094E7;
     border-left-style: solid;
+    position: relative;
+    transition: 0.3s cubic-bezier(.19,.01,.28,.9);
+}
+
+.last-week-hint {
+    font-weight: 500 !important;
+    text-align: center;
+    color: #0094E7;
+}
+
+// events
+
+.highlight-hint-card {
+    background-color: #0094E7;
+    display: inline-flex;
+    border-radius: 2px;
+    position: absolute;
+    top: -12px;
+    color: white;
+    p {
+        font-size: 15pt;
+        color: white;
+    }
+}
+
+// news
+
+.card-subtitle-news-text {
+    position: relative;
+    top: 4px;
+}
+
+// hover state
+
+.md-card:hover {
+    cursor: pointer;
+    box-shadow: 0px 8px 10px 1px #0000000a;
+    border-left-width: 4px;
+    transform: translate(-2px, -3px) scale(1.01);
 }

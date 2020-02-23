@@ -2,12 +2,100 @@
 <!-- <button [clrLoading]="validateBtnState" class="btn btn-info-outline" (click)="validateDemo()">Validate</button> -->
 <div class="clr-row m-3">
   <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-    <div class="md-card mb-2" *ngFor="let card of ['世界經濟論壇', '索羅門 台灣 斷交', '中共 軍機 巴士海峽', '黑鷹 直升機 參謀總長']">
-      <div class="card-title">
-        {{card}}
+    <!-- events layout -->
+    <div *ngIf="this.mainBrowseService.getDisplayType === 'events'">
+      <!-- highlighted card -->
+      <div class="md-card pt-3 mb-2">
+        <div class="highlight-hint-card inline-flex p-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="text-white feather feather-star">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+            </polygon>
+          </svg>
+          <p class="pl-1 text-white">
+            焦點事件
+          </p>
+        </div>
+        <p class="mb-1 mt-2 text-highlight">
+          {{events[0].title}}
+        </p>
+        <div class="card-text">
+          {{events[0].agencies}}
+        </div>
+        <p class="card-text text-s">
+          共{{events[0].tagCount}}則標記
+        </p>
       </div>
-      <div class="card-text">
-        自由、ETToday、中時、今日、中天 共16則標記
+      <!-- this week cards -->
+      <div *ngFor="let event of events; let i = index">
+        <div class="md-card mb-2" *ngIf="i !== 0">
+          <p class="card-title">
+            {{event.title}}
+          </p>
+          <div class="card-text">
+            {{event.agencies}}
+          </div>
+          <p class="card-text text-s">
+            共{{event.tagCount}}則標記
+          </p>
+        </div>
+      </div>
+      <!-- last week cards -->
+      <p class="last-week-hint mb-2">上週熱門</p>
+      <div *ngFor="let event of events; let i = index">
+        <div class="md-card mb-2" *ngIf="i !== 0">
+          <p class="card-title">
+            {{event.title}}
+          </p>
+          <div class="card-text">
+            {{event.agencies}}
+          </div>
+          <p class="card-text text-s">
+            共{{event.tagCount}}則標記
+          </p>
+        </div>
+      </div>Î
+    </div>
+    <!-- news layout -->
+    <div *ngIf="this.mainBrowseService.getDisplayType === 'news'">
+      <div *ngFor="let eachNews of news; let i = index">
+        <div class="md-card mb-2" *ngIf="i !== 0">
+          <p class="card-title">
+            {{eachNews.title}}
+          </p>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-column">
+              <div class="card-text card-subtitle-news-text">
+                {{eachNews.agency}} | {{eachNews.topicType}}
+              </div>
+              <p class="card-text text-s">
+                {{eachNews.lastUpdate}}最後更新
+              </p>
+            </div>
+            <div class="d-flex align-self-end">
+              <button class="m-0 btn btn-primary">分類至...</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- last week cards -->
+      <p class="last-week-hint mb-2">上週熱門</p>
+      <div *ngFor="let eachNews of news; let i = index">
+        <div class="md-card mb-2" *ngIf="i !== 0">
+          <p class="card-title">
+            {{eachNews.title}}
+          </p>
+          <div class="d-flex flex-row">
+            <div class="card-text">
+              {{eachNews.agency}} | {{eachNews.topicType}}
+            </div>
+            <p class="card-text text-s">
+              {{eachNews.lastUpdate}}最後更新
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
