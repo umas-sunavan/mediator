@@ -13,14 +13,14 @@ export class TitleDropDownComponent implements OnInit {
     private mainBrowseService: MainBrowseService
   ) { }
   clrIfOpen: boolean
-  displayTypeControl = this.mainBrowseService.getDisplayType
+  displayTypeControl = this.mainBrowseService.getMainDisplayType
 
   ngOnInit(): void {
     this.clrIfOpen = false
   }
 
   switchDisplay = (type) => {
-    this.mainBrowseService.setDisplayType = type === 'news' ? 'news' : 'events'
+    this.mainBrowseService.setMainDisplayType = type === 'news' ? 'news' : 'events'
     this.displayTypeControl = type === 'news' ? 'news' : 'events'
   }
 

@@ -3,7 +3,7 @@
 <div class="clr-row m-3">
   <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
     <!-- events layout -->
-    <div *ngIf="this.mainBrowseService.getDisplayType === 'events'">
+    <div *ngIf="this.mainBrowseService.getMainDisplayType === 'events'">
       <!-- highlighted card -->
       <div class="md-card pt-3 mb-2">
         <div class="highlight-hint-card inline-flex p-1">
@@ -29,7 +29,7 @@
         </p>
       </div>
       <!-- this week cards -->
-      <div *ngFor="let event of events; let i = index">
+      <div *ngFor="let event of events; let i = index" (click)="clickEvent(i)" [routerLink]="['/news-list',event.id]">
         <div class="md-card mb-2" *ngIf="i !== 0">
           <p class="card-title">
             {{event.title}}
@@ -56,10 +56,10 @@
             共{{event.tagCount}}則標記
           </p>
         </div>
-      </div>Î
+      </div>
     </div>
     <!-- news layout -->
-    <div *ngIf="this.mainBrowseService.getDisplayType === 'news'">
+    <div *ngIf="this.mainBrowseService.getMainDisplayType === 'news'">
       <div *ngFor="let eachNews of news; let i = index">
         <div class="md-card mb-2" *ngIf="i !== 0">
           <p class="card-title">
