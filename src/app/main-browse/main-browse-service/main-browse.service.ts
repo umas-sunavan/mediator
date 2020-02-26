@@ -104,7 +104,7 @@ export class MainBrowseService {
               context: ['台灣']
             }, {
               type: '情緒化用字',
-              context: ['！、怒斥']
+              context: ['！', '怒斥']
             }, {
               type: '選擇聚焦',
               context: ['違背基本人權']
@@ -155,7 +155,7 @@ export class MainBrowseService {
               context: ['台灣']
             }, {
               type: '情緒化用字',
-              context: ['！、怒斥']
+              context: ['！','怒斥']
             }, {
               type: '選擇聚焦',
               context: ['違背基本人權']

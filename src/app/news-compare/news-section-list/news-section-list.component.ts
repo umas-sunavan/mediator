@@ -17,7 +17,6 @@ export class NewsSectionListComponent implements OnInit {
   allEventNews = this.mainBrowseService.getAllNewsInEvent
 
   ngOnInit() {
-    console.log('Hi');
     console.log(this.allEventNews);
     this.activatedRouter.paramMap.subscribe( params => {
       console.log(this.mainBrowseService.getNewsInEvent(+params.get('eventId')));

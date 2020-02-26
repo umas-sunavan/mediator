@@ -1,1 +1,18 @@
 <p>news-section-list works!</p>
+<div *ngFor="let news of allEventNews; let i = index">
+  <div class="md-news-section-card mb-2" *ngIf="i !== 0">
+    <h4 class="news-section-context font-xb">
+      {{ news.newsSections[0].context.join('') }}
+    </h4>
+    <div class="d-flex flex-wrap">
+        <div class="reference-item-container col-6 p-0" *ngFor="let reference of news.newsSections[0].references">
+            <h5 class="reference-item-type">
+              {{ reference.type }}
+            </h5>
+            <h5 class="reference-item-context font-l">
+              {{ reference.context.join('、')}}
+            </h5>
+          </div>
+    </div>
+  </div>
+</div>

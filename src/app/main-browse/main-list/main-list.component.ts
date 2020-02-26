@@ -17,7 +17,7 @@ export class MainListComponent implements OnInit {
     private router: Router
   ) { }
   // validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
-  private events:Event[] = this.mainBrowseService.getEventsList
+  public events:Event[] = this.mainBrowseService.getEventsList
   private news:News[] = this.mainBrowseService.getUngroupNewsList
   private displayType:string = this.mainBrowseService.getMainDisplayType
 
