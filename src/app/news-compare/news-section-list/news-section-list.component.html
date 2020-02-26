@@ -1,1 +1,12 @@
-<p>news-section-list works!</p>
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink id="link1">各家標題</button>
+        <clr-tab-content id="content1" *clrIfActive>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>各家摘要</button>
+        <clr-tab-content *clrIfActive="true">
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>
