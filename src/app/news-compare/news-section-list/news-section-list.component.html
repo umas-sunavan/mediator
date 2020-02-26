@@ -1,30 +1,37 @@
-<clr-tabs>
-    <clr-tab>
-        <button clrTabLink id="link1">各家標題</button>
-        <clr-tab-content id="content1" *clrIfActive>
-        </clr-tab-content>
-    </clr-tab>
-    <clr-tab>
-        <button clrTabLink>各家摘要</button>
-        <clr-tab-content *clrIfActive="true">
-        </clr-tab-content>
-    </clr-tab>
-</clr-tabs>
-<p>news-section-list works!</p>
-<div *ngFor="let news of allEventNews; let i = index">
-  <div class="md-news-section-card mb-2" *ngIf="i !== 0">
-    <h4 class="news-section-context font-xb">
-      {{ news.newsSections[0].context.join('') }}
-    </h4>
-    <div class="d-flex flex-wrap">
-        <div class="reference-item-container col-6 p-0" *ngFor="let reference of news.newsSections[0].references">
-            <h5 class="reference-item-type">
-              {{ reference.type }}
-            </h5>
-            <h5 class="reference-item-context font-l">
-              {{ reference.context.join('、')}}
-            </h5>
-          </div>
+<div class="d-flex flex-column component-container">
+    <clr-tabs class="d-flex justify-content-center my-2">
+        <clr-tab class="">
+            <button aria-selected="true" clrTabLink id="link1">各家標題</button>
+            <clr-tab-content id="content1" *clrIfActive="true">
+            </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+            <button aria-selected="false" clrTabLink>各家摘要</button>
+            <clr-tab-content *clrIfActive="false">
+            </clr-tab-content>
+        </clr-tab>
+    </clr-tabs>
+    <div *ngFor="let news of allEventNews; let i = index" class="md-news-section-cards-container">
+      <div class="md-news-section-card ml-3 mb-2 {{
+          i%5 === 0 ? 'card-r': 
+          i%5 === 1 ? 'card-b': 
+          i%5 === 2 ? 'card-o': 
+          i%5 === 3 ? 'card-p': 
+          i%5 === 4 ? 'card-g': '' 
+        }}">
+        <h4 class="news-section-context font-xb">
+          {{ news.newsSections[0].context.join('') }}
+        </h4>
+        <div class="d-flex flex-wrap">
+            <div class="reference-item-container col-6 p-0" *ngFor="let reference of news.newsSections[0].references">
+                <h5 class="reference-item-type">
+                  {{ reference.type }}
+                </h5>
+                <h5 class="reference-item-context font-l">
+                  {{ reference.context.join('、')}}
+                </h5>
+              </div>
+        </div>
+      </div>
     </div>
-  </div>
 </div>

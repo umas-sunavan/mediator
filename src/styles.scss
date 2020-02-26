@@ -45,3 +45,18 @@ p {
 .font-l {
     font-weight: 300 !important;
 }
+
+// fix the tab style in news-section-list
+
+.nav {
+    width: auto !important;
+}
+
+.nav-item    {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-item:nth-of-type(1)    {
+    margin-right: 0rem;
+}
