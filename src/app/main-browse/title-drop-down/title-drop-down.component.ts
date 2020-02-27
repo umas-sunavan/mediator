@@ -24,7 +24,4 @@ export class TitleDropDownComponent implements OnInit {
     this.displayTypeControl = type === 'news' ? 'news' : 'events'
   }
 
-
-
-
 }

@@ -14,7 +14,10 @@ export class NewsSectionListComponent implements OnInit {
     private activatedRouter: ActivatedRoute
   ) { }
 
+  isPanRight:boolean = true
   allEventNews = this.mainBrowseService.getAllNewsInEvent
+  private mouseHolding = false
+  detectHolding
 
   ngOnInit() {
     console.log(this.allEventNews);
@@ -23,4 +26,30 @@ export class NewsSectionListComponent implements OnInit {
     })
   }
 
+  public clickSummary = () => {
+    console.log('clicked');
+  }
+
+  panRight = (isRight: boolean) => { this.isPanRight = isRight}
+
+  mousedown = (event: MouseEvent) => {
+    this.mouseHolding = true
+    console.log('down');
+    // this.detectHolding = setInterval( () => {
+    //   console.log(event.clientX, event.clientY);
+    // }, 50)    
+  }
+
+  mouseOver = (event: MouseEvent) => {
+    console.log('over');
+    console.log(event.clientX, event.clientY);
+  }
+
+  mouseUp = () => {
+    this.mouseHolding = false
+    clearInterval(this.detectHolding)
+    console.log('clear');
+    
+
+  }
 }
