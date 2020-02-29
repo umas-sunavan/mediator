@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "mediator"
+  "defaultProject": "mediator",
+  "cli": {
+    "analytics": "1c493889-c250-46a2-9d43-52e2a737eb3d"
+  }
 }

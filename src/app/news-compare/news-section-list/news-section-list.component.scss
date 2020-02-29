@@ -80,3 +80,26 @@
     font-size: 0.75rem;
     line-height: 1.15rem;
 }
+
+// tab
+
+.tab-container {
+    border-bottom: 1px #b4b4b4 solid;
+}
+
+.tab {
+    background-color: #00000000;
+    border: none;
+}
+
+.current-position {
+    margin: 0px 5% 0px 5%;
+    width: 40%;
+    height: 2px;
+    background-color: #0094E7;
+    transition: 0.3s cubic-bezier(.19,.01,.28,.9);
+}
+
+.panned-right {
+    margin-left: 55%;
+}

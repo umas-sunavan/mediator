@@ -18,8 +18,8 @@ export class MainListComponent implements OnInit {
   ) { }
   // validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
   public events:Event[] = this.mainBrowseService.getEventsList
-  private news:News[] = this.mainBrowseService.getUngroupNewsList
-  private displayType:string = this.mainBrowseService.getMainDisplayType
+  public news:News[] = this.mainBrowseService.getUngroupNewsList
+  public displayType:string = this.mainBrowseService.getMainDisplayType
 
   ngOnInit() {
 

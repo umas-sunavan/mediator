@@ -1,16 +1,13 @@
-<div class="d-flex flex-column component-container"  (mousedown)='mousedown($event)' (mouseover)="mouseOver($event)" (mouseup)="mouseUp($event)">
-  <clr-tabs class="d-flex justify-content-center my-2">
-    <clr-tab class="">
-      <button aria-selected="true" clrTabLink id="link1" (click)="panRight(false)">各家標題</button>
-      <clr-tab-content id="content1" *clrIfActive="true">
-      </clr-tab-content>
-    </clr-tab>
-    <clr-tab>
-      <button aria-selected="false" class="" clrTabLink (click)="panRight(true)">各家摘要</button>
-      <clr-tab-content *clrIfActive="false">
-      </clr-tab-content>
-    </clr-tab>
-  </clr-tabs>
+<div class="d-flex flex-column component-container" (mousedown)='mousedown($event)' (mouseover)="mouseOver($event)"
+  (mouseup)="mouseUp()">
+  <div class="mx-auto px-1 my-2 tab-container justify-content-center d-flex flex-column">
+    <div class="tab-btns">
+      <button class="py-1 px-2 tab" (click)="panRight(false)">各家摘要</button>
+      <button class="py-1 px-2 tab" (click)="panRight(true)">各家摘要</button>
+    </div>
+    <div class="current-position {{isPanRight ? 'panned-right' : ''}}">
+    </div>
+  </div>
   <div class="md-news-section-cards-container {{isPanRight? 'pan-right': ''}}">
     <div *ngFor="let news of allEventNews; let i = index">
       <div class="md-news-section-card d-flex ml-3 mb-2 {{

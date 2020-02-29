@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, enableProdMode } from '@angular/core';
 import { ClrLoadingState } from '@clr/angular';
 import { MainBrowseService } from '../main-browse-service/main-browse.service';
+import {hammerJs} from 'node_modules/hammerjs'
 
 @Component({
   selector: 'app-title-drop-down',
