@@ -12,4 +12,9 @@ export class EditTagComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onTap(event) {
+    console.log('hi');
+    
+  }
+
 }
