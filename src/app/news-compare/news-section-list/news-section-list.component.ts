@@ -14,14 +14,22 @@ export class NewsSectionListComponent implements OnInit {
     private activatedRouter: ActivatedRoute
   ) { }
 
-  isPanRight:boolean = true
+  isPanLeft: boolean = false
   allEventNews = this.mainBrowseService.getAllNewsInEvent
   private mouseHolding = false
   detectHolding
+  PANNED_LEFT_POSITION = -100
+  ORIGIONAL_POSITION = 0
+  POSITION_TO_PAN_LEFT = -100
+  POSITION_TO_PAN_RIGHT = 100
+
+  pagePosition = 0
+  fingerPosition = 0
+  transitionControl = '0.3s cubic-bezier(.19,.01,.28,.9);'
 
   ngOnInit() {
     console.log(this.allEventNews);
-    this.activatedRouter.paramMap.subscribe( params => {
+    this.activatedRouter.paramMap.subscribe(params => {
       console.log(this.mainBrowseService.getNewsInEvent(+params.get('eventId')));
     })
   }
@@ -30,26 +38,37 @@ export class NewsSectionListComponent implements OnInit {
     console.log('clicked');
   }
 
-  panRight = (isRight: boolean) => { this.isPanRight = isRight}
 
-  mousedown = (event: MouseEvent) => {
-    this.mouseHolding = true
-    console.log('down');
-    // this.detectHolding = setInterval( () => {
-    //   console.log(event.clientX, event.clientY);
-    // }, 50)    
+  onPan = (event) => {
+    console.log('pan', event.center.x, event.center.x);
   }
 
-  mouseOver = (event: MouseEvent) => {
-    console.log('over');
-    console.log(event.clientX, event.clientY);
+  onPanStart = (event) => {
+    this.moveSmooth(false)
+    this.pagePosition = this.isPanLeft ? this.PANNED_LEFT_POSITION: this.ORIGIONAL_POSITION
   }
 
-  mouseUp = () => {
-    this.mouseHolding = false
-    clearInterval(this.detectHolding)
-    console.log('clear');
-    
+  onPanLeft = (event) => this.fingerPosition = event.deltaX * 1
 
+  onPanRight = (event) => this.fingerPosition = event.deltaX * 1
+
+  onPanEnd = (event) => {
+    if (this.fingerPosition < this.POSITION_TO_PAN_LEFT) {
+      this.defineIsPanLeft(true)
+    } else if (this.fingerPosition > this.POSITION_TO_PAN_RIGHT) {
+      this.defineIsPanLeft(false)
+    }
+
+    this.positioningPage()
+    this.resetFingerPosition()
+    this.moveSmooth(true)
   }
+
+  defineIsPanLeft = (shouldPanLeft:boolean) => {this.isPanLeft = shouldPanLeft}
+
+  positioningPage = () => this.pagePosition = this.isPanLeft ? this.PANNED_LEFT_POSITION : this.ORIGIONAL_POSITION
+
+  resetFingerPosition = () => this.fingerPosition = 0
+
+  moveSmooth = (shouldSmooth:boolean) => this.transitionControl = shouldSmooth ? '0.3s cubic-bezier(.19,.01,.28,.9)' : 'none'
 }
