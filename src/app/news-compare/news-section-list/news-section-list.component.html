@@ -1,4 +1,4 @@
-<div class="d-flex flex-column component-container">
+<div class="d-flex flex-column component-container"  (mouseDown)="mouseDown($event)" (mouseover)="mouseOver($event)" (touchmove)="touchMove($event)" (touchstart)="touchStart($event)">
   <div class="mx-auto px-1 my-2 tab-container justify-content-center d-flex flex-column">
     <div class="tab-btns">
       <button class="py-1 px-2 tab" (click)="defineIsPanLeft(false)">各家摘要</button>
@@ -7,7 +7,7 @@
     <div class="current-position {{isPanLeft ? 'panned-left' : ''}}">
     </div>
   </div>
-<div class="md-news-section-cards-container {{isPanLeft? 'pan-left': ''}}" (panstart)="onPanStart($event)" (panleft)="onPanLeft($event)" (panright)="onPanRight($event)" (panend)="onPanEnd($event)" [ngStyle]="{transform: 'translateX(calc(' + pagePosition + '% + ' + fingerPosition + 'px))', transition: transitionControl}">
+  <div class="md-news-section-cards-container {{isPanLeft? 'pan-left': ''}}"  [ngStyle]="{transform: 'translateX(calc(' + pagePosition + '% + ' + fingerPosition + 'px))', transition: transitionControl}">
     <div *ngFor="let news of allEventNews; let i = index">
       <div class="md-news-section-card d-flex ml-3 mb-2 {{
           i%5 === 0 ? 'card-r': 
