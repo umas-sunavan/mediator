@@ -1,4 +1,4 @@
-<div class="d-flex flex-column component-container"  (mouseDown)="mouseDown($event)" (mouseover)="mouseOver($event)" (touchmove)="touchMove($event)" (touchstart)="touchStart($event)">
+<div class="d-flex flex-column component-container" (touchmove)="touchMove($event)" (touchstart)="touchStart($event)" (touchend)="touchEnd($evnet)" (mousemove)="mouseMove($event)" (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)">
   <div class="mx-auto px-1 my-2 tab-container justify-content-center d-flex flex-column">
     <div class="tab-btns">
       <button class="py-1 px-2 tab" (click)="defineIsPanLeft(false)">各家摘要</button>

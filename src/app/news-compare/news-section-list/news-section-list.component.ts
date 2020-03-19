@@ -33,6 +33,12 @@ export class NewsSectionListComponent implements OnInit {
   deltaY = 0
   clientStartX = 0
   clientStartY = 0
+  waitCount = 0
+  /**
+   * Three string parameters: 'right', 'left', 'up', 'down', 'notMoving'
+  **/
+  direction = 'notMove'
+  isMouseDown = false
 
   ngOnInit() {
     console.log(this.allEventNews);
@@ -41,45 +47,109 @@ export class NewsSectionListComponent implements OnInit {
     })
   }
 
-  public clickSummary = () => {
-    console.log('clicked');
+  touchStart = (event: TouchEvent) => {
+    this.recordClientXYStartPosition('touch',event)
+    this.moveSmooth(false)
   }
 
-  mouseDown = (event: MouseEvent) => {
-    console.log(event.offsetX, event.offsetY);
+  recordClientXYStartPosition = (eventType: string, event: TouchEvent | MouseEvent) => {
+    let touchEvent: TouchEvent
+    let mouseEvent: MouseEvent
+    switch (eventType) {
+      case 'touch':
+        touchEvent = event
+        this.clientStartX = touchEvent.touches[0].clientX
+        this.clientStartY = touchEvent.touches[0].clientY
+        break;
+      case 'mouse':
+        mouseEvent = event
+        this.clientStartX = mouseEvent.clientX
+        this.clientStartY = mouseEvent.clientY
+        break;
+    }
   }
 
-  mouseOver = (event: MouseEvent) => {
-    console.log(event.offsetX, event.offsetY);
-
+  recordClientXYPosition = (eventType: string, event: TouchEvent | MouseEvent) => {
+    let touchEvent: TouchEvent
+    let mouseEvent: MouseEvent
+    switch (eventType) {
+      case 'touch':
+        touchEvent = event
+        this.clientX = touchEvent.touches[0].clientX
+        this.clientY = touchEvent.touches[0].clientY
+        break;
+      case 'mouse':
+        mouseEvent = event
+        this.clientX = mouseEvent.clientX
+        this.clientY = mouseEvent.clientY
+        break;
+    }
   }
 
-  onPan = (event) => {
-    console.log('pan', event.center.x, event.center.x);
+  touchMove = (event: TouchEvent) => {
+    this.recordClientXYPosition('touch', event)
+    this.defineMovingDistance()
+    if (this.waitTouchDirection()) {
+      if (this.decided()) {
+        this.moveAloneWithDirection(this.direction)
+      } else {
+        this.decideDirection(this.isFingerHorizontal())
+        this.moveAloneWithDirection(this.direction)
+      }
+    } else {
+      this.waitCount++
+    }
+    console.log(this.direction);
   }
 
-  touchStart = (event) => {
-    this.clientStartX = event.touches[0].clientX
-    this.clientStartY = event.touches[0].clientY
-    console.log('houch start');
-    
+  decided = () => this.direction !== 'notMove'
+
+  decideDirection = (isHorizontal) => {
+    this.direction =
+      isHorizontal ?
+        (this.isMoveLeft() ? 'left' : 'right') :
+        (this.isMoveUp() ? 'up' : 'down')
   }
 
-  touchMove = (event) => {
+  isMoveLeft = () => this.deltaX < 0
+
+  isMoveUp = () => this.deltaY < 0
+
+  moveAloneWithDirection = (direction) => {
+    switch (direction) {
+      case 'right':
+        event.preventDefault()
+        this.onPanRight({ deltaX: this.deltaX })
+        break;
+      case 'left':
+        event.preventDefault()
+        this.onPanLeft({ deltaX: this.deltaX })
+        break;
+      case 'vertical':
+        break;
+    }
+  }
+
+  waitTouchDirection = (): boolean => this.waitCount > 2
+
+  touchEnd = () => {
+    this.waitCount = 0
+    if (this.fingerPosition < this.POSITION_TO_PAN_LEFT) {
+      this.defineIsPanLeft(true)
+    } else if (this.fingerPosition > this.POSITION_TO_PAN_RIGHT) {
+      this.defineIsPanLeft(false)
+    }
+    this.positioningPage()
+    this.resetFingerPosition()
+    this.moveSmooth(true)
+    this.direction = 'notMove'
+  }
+
+  isFingerHorizontal = () => Math.abs(this.deltaX) > Math.abs(this.deltaY)
+
+  defineMovingDistance = () => {
     this.deltaX = this.clientX - this.clientStartX
     this.deltaY = this.clientY - this.clientStartY
-    console.log('touchMove', event.touches[0].clientX, event.touches[0].clientY, this.deltaX, this.deltaY);
-    this.clientX = event.touches[0].clientX
-    this.clientY = event.touches[0].clientY
-    if (this.deltaX > 30 && Math.abs(this.deltaY) < 90 ) this.onPanRight({deltaX:this.deltaX})
-    if (this.deltaX < -30 && Math.abs(this.deltaY) < 90 ) this.onPanLeft({deltaX:this.deltaX})
-  }
-
-  onPanStart = (event) => {
-    this.moveSmooth(false)
-    this.pagePosition = this.isPanLeft ? this.PANNED_LEFT_POSITION : this.ORIGIONAL_POSITION
-    console.log('pan start');
-
   }
 
   onPanLeft = (event) => {
@@ -90,32 +160,43 @@ export class NewsSectionListComponent implements OnInit {
     this.fingerPosition = event.deltaX * 1
   }
 
-  onPanEnd = (event) => {
+  mouseDown = (event: MouseEvent) => {
+    this.isMouseDown = true
+    this.recordClientXYStartPosition('mouse',event)
+    this.moveSmooth(false)
+  }
+
+  mouseMove = (event: MouseEvent) => {
+    if (this.isMouseDown) {
+
+      this.recordClientXYPosition('mouse', event)
+      this.defineMovingDistance()
+      if (this.waitTouchDirection()) {
+        if (this.decided()) {
+          this.moveAloneWithDirection(this.direction)
+        } else {
+          this.decideDirection(this.isFingerHorizontal())
+          this.moveAloneWithDirection(this.direction)
+        }
+      } else {
+        this.waitCount++
+      }
+      console.log(this.direction);
+    }
+  }
+
+  mouseUp = () => {
+    this.isMouseDown = false
+    this.waitCount = 0
     if (this.fingerPosition < this.POSITION_TO_PAN_LEFT) {
       this.defineIsPanLeft(true)
     } else if (this.fingerPosition > this.POSITION_TO_PAN_RIGHT) {
       this.defineIsPanLeft(false)
     }
-
     this.positioningPage()
     this.resetFingerPosition()
     this.moveSmooth(true)
-    console.log('pan end');
-  }
-
-  panDown = () => {
-    console.log('down');
-
-  }
-
-  panUp = () => {
-    console.log('up');
-
-  }
-
-  click = () => {
-    console.log('click');
-
+    this.direction = 'notMove'
   }
 
   defineIsPanLeft = (shouldPanLeft: boolean) => { this.isPanLeft = shouldPanLeft }
