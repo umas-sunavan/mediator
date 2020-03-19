@@ -53,8 +53,8 @@ export class NewsSectionListComponent implements OnInit {
   }
 
   recordClientXYStartPosition = (eventType: string, event: TouchEvent | MouseEvent) => {
-    let touchEvent: TouchEvent
-    let mouseEvent: MouseEvent
+    let touchEvent
+    let mouseEvent
     switch (eventType) {
       case 'touch':
         touchEvent = event
@@ -70,8 +70,8 @@ export class NewsSectionListComponent implements OnInit {
   }
 
   recordClientXYPosition = (eventType: string, event: TouchEvent | MouseEvent) => {
-    let touchEvent: TouchEvent
-    let mouseEvent: MouseEvent
+    let touchEvent
+    let mouseEvent
     switch (eventType) {
       case 'touch':
         touchEvent = event
@@ -132,7 +132,7 @@ export class NewsSectionListComponent implements OnInit {
 
   waitTouchDirection = (): boolean => this.waitCount > 2
 
-  touchEnd = () => {
+  touchEnd = (event: TouchEvent) => {
     this.waitCount = 0
     if (this.fingerPosition < this.POSITION_TO_PAN_LEFT) {
       this.defineIsPanLeft(true)
@@ -185,7 +185,7 @@ export class NewsSectionListComponent implements OnInit {
     }
   }
 
-  mouseUp = () => {
+  mouseUp = (event: TouchEvent) => {
     this.isMouseDown = false
     this.waitCount = 0
     if (this.fingerPosition < this.POSITION_TO_PAN_LEFT) {
